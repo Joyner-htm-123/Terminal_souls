@@ -1,13 +1,8 @@
 import random
 
-# =========================
-# MAIN FUNCTIONS
-# =========================
-
 def generate_damage(minimum, maximum):
     damage = random.randint(minimum, maximum)
     
-    # 10% critical hit
     if random.random() < 0.1:
         damage *= 2
         print("💥 Critical hit!")
@@ -31,7 +26,6 @@ def show_status(hero_name, hp_h, enemy_name, hp_e):
 def player_turn(hp_h, hp_e, potions):
     option = ""
     
-    # Validation without while True
     while option not in ["1", "2", "3"]:
         print("\nYour turn:")
         print("1. Attack")
@@ -70,7 +64,6 @@ def player_turn(hp_h, hp_e, potions):
 def enemy_turn(hp_h, hp_e):
     print("Enemy's turn...")
     
-    # Basic AI
     if hp_e <= 0.2 * 120 and random.random() < 0.5:
         hp_e += 15
         print("👾 The enemy heals 15 HP.")
@@ -91,11 +84,6 @@ def check_winner(hp_h, hp_e):
         return True
     return False
 
-
-# =========================
-# MAIN LOOP WITHOUT while True
-# =========================
-
 def game():
     hero_name = "Hero"
     enemy_name = "Enemy"
@@ -106,22 +94,17 @@ def game():
     
     print("⚔️ Welcome to Terminal Souls ⚔️")
     
-    # Direct condition (NO while True)
     while hp_h > 0 and hp_e > 0:
         show_status(hero_name, hp_h, enemy_name, hp_e)
         
-        # Player turn
         hp_h, hp_e, potions = player_turn(hp_h, hp_e, potions)
         
         if check_winner(hp_h, hp_e):
             break
         
-        # Enemy turn
         hp_h, hp_e = enemy_turn(hp_h, hp_e)
         
         if check_winner(hp_h, hp_e):
             break
 
-
-# Run
 game()
